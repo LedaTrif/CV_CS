@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Leda Trifonova — Customer Support, Travel Operations and practical AI automation specialist in Barcelona.">
+  <title>Leda Trifonova — Customer Support & AI</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="wordmark" href="#top" aria-label="Leda Trifonova home">LT<span>.</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="#experience" data-i18n="navExperience">Experience</a>
+      <a href="#ai-lab" data-i18n="navAI">AI in action</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
+    </nav>
+    <button class="language" id="languageToggle" type="button" aria-label="Cambiar a español">ES</button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span><span data-i18n="available">Barcelona · Open to fully remote</span></p>
+        <h1><span data-i18n="hello">Hi, I’m</span> <em>Leda.</em></h1>
+        <p class="hero-lead" data-i18n="heroLead">I solve customer problems, coordinate travel operations and use AI to turn repetitive work into clear, faster workflows.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#ai-lab" data-i18n="seeAI">See how I use AI</a>
+          <a class="button secondary" href="Leda_Trifonova_CV_2026_EN_CS.pdf" download data-i18n="downloadCV">Download CV</a>
+        </div>
+        <div class="proof-row" aria-label="Professional highlights">
+          <div><strong>12+</strong><span data-i18n="years">years in support & travel</span></div>
+          <div><strong>70+</strong><span data-i18n="cases">cases handled daily</span></div>
+          <div><strong>5</strong><span data-i18n="languages">working languages</span></div>
+        </div>
+      </div>
+      <div class="portrait-wrap">
+        <div class="portrait-card">
+          <img src="leda-trifonova.jpeg" alt="Portrait of Leda Trifonova" width="800" height="800">
+          <div class="portrait-note note-one" data-i18n="noteOne">Human first</div>
+          <div class="portrait-note note-two" data-i18n="noteTwo">AI assisted</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="Skills">
+      <div class="ticker-track">
+        <span>Customer Support</span><i>✦</i><span>Travel Operations</span><i>✦</i><span>Zendesk</span><i>✦</i><span>AI Workflows</span><i>✦</i><span>Multilingual Communication</span><i>✦</i><span>Process Improvement</span>
+      </div>
+    </section>
+
+    <section class="section experience" id="experience">
+      <div class="section-heading">
+        <p class="section-kicker" data-i18n="experienceKicker">Experience</p>
+        <h2 data-i18n="experienceTitle">Calm under pressure.<br>Curious by default.</h2>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-meta"><span>2025 — <span data-i18n="present">Present</span></span><span class="tag">Nuitee Travel</span></div>
+          <h3 data-i18n="nuiteeTitle">Customer Service Representative</h3>
+          <p data-i18n="nuiteeText">Managing 70+ daily B2B hotel cases, from check-in instructions and booking changes to supplier escalations — across five markets and a 48–72 hour SLA.</p>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-meta"><span>2021 — 2024</span><span class="tag">Booking.com</span></div>
+          <h3 data-i18n="bookingTitle">Customer Service Specialist</h3>
+          <p data-i18n="bookingText">Supported travellers and accommodation partners in Bulgarian, English and Spanish, resolving reservations, cancellations, refunds and overbooking cases.</p>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-meta"><span>2014 — <span data-i18n="present">Present</span></span><span class="tag">ZaBarcelona.com</span></div>
+          <h3 data-i18n="founderTitle">Founder & Digital Operator</h3>
+          <p data-i18n="founderText">Built a practical service portal for the Bulgarian community in Barcelona, coordinating client enquiries, content, services and partners end to end.</p>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-meta"><span>2007 — 2009</span><span class="tag">Alma Tour</span></div>
+          <h3 data-i18n="almaTitle">B2B Reservations Agent</h3>
+          <p data-i18n="almaText">Managed reservations and booking coordination for travel agency partners — the foundation of my supplier-side understanding.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section ai-lab" id="ai-lab">
+      <div class="lab-intro">
+        <p class="section-kicker light" data-i18n="labKicker">Interactive AI lab</p>
+        <h2 data-i18n="labTitle">Give me a situation.</h2>
+        <p data-i18n="labIntro">AI does not replace judgment. It helps me structure information, spot gaps and move faster. Choose a real work scenario:</p>
+      </div>
+      <div class="scenario-grid" role="group" aria-label="Choose a work scenario">
+        <button class="scenario active" type="button" data-scenario="escalation"><span>01</span><b data-i18n="scenarioEscalation">Urgent customer escalation</b></button>
+        <button class="scenario" type="button" data-scenario="workflow"><span>02</span><b data-i18n="scenarioWorkflow">Repetitive team workflow</b></button>
+        <button class="scenario" type="button" data-scenario="content"><span>03</span><b data-i18n="scenarioContent">Multilingual content task</b></button>
+      </div>
+      <div class="lab-console" aria-live="polite">
+        <div class="console-bar"><span></span><span></span><span></span><small>leda-ai-copilot</small></div>
+        <div class="console-content" id="scenarioOutput"></div>
+      </div>
+      <p class="lab-footnote" data-i18n="labFootnote">The important part is not the prompt. It is knowing what to verify before acting.</p>
+    </section>
+
+    <section class="section toolbox">
+      <div class="section-heading compact">
+        <p class="section-kicker" data-i18n="toolboxKicker">Toolbox</p>
+        <h2 data-i18n="toolboxTitle">Tools change.<br>Good judgment travels.</h2>
+      </div>
+      <div class="tool-cloud" aria-label="Tools and skills">
+        <span>Zendesk</span><span>Slack</span><span>Aircall</span><span>LiteAPI</span><span>Excel</span><span>WordPress</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>AI tools</span><span>Travel systems</span><span>Process design</span>
+      </div>
+    </section>
+
+    <section class="section languages-section">
+      <p class="section-kicker" data-i18n="languagesKicker">Languages</p>
+      <div class="language-list">
+        <div><strong>Bulgarian</strong><span data-i18n="native">Native</span></div>
+        <div><strong>Spanish</strong><span>C2</span></div>
+        <div><strong>English</strong><span>C2</span></div>
+        <div><strong>Greek</strong><span>C1</span></div>
+        <div><strong>Catalan</strong><span>B2</span></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <p class="section-kicker light" data-i18n="contactKicker">Let’s talk</p>
+      <h2 data-i18n="contactTitle">Need someone who can handle the customer — and improve the system behind the conversation?</h2>
+      <div class="contact-actions">
+        <a class="button white" href="mailto:leda.trifonova@gmail.com" data-i18n="emailMe">Email me</a>
+        <a class="button ghost" href="https://www.linkedin.com/in/ledatrifonova/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="button ghost" href="tel:+34666840178">+34 666 84 01 78</a>
+      </div>
+      <button class="surprise" id="surpriseButton" type="button" data-i18n="surprise">One last click ✦</button>
+      <p class="surprise-message" id="surpriseMessage" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Leda Trifonova</span>
+    <span data-i18n="footer">Made with curiosity, judgment & AI.</span>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
