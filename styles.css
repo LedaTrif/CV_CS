@@ -129,32 +129,26 @@ h2 { font-size: clamp(2.5rem, 5.5vw, 5rem); letter-spacing: -.055em; margin: 0; 
 .contact h2 { max-width: 970px; margin: 20px 0 46px; }
 .white { background: white; color: var(--ink); }
 .ghost { border: 1px solid #ffffff66; color: white; }
-.leda-mode {
+.coffee-widget {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
+  right: 20px;
+  bottom: 20px;
   z-index: 40;
-  width: min(360px, calc(100vw - 32px));
-  padding: 22px;
-  border: 2px solid var(--ink);
-  border-radius: 20px;
-  background: var(--lime);
-  color: var(--ink);
-  box-shadow: 9px 9px 0 var(--ink);
-  transform: translateY(28px) rotate(1deg);
+  transform: translateY(20px) scale(.7);
   opacity: 0;
   transition: transform .45s cubic-bezier(.2,.8,.2,1), opacity .3s ease;
 }
-.leda-mode[hidden] { display: none; }
-.leda-mode.is-visible { transform: translateY(0) rotate(-1deg); opacity: 1; }
-.leda-mode-close { position: absolute; top: 10px; right: 10px; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; font: 500 1.6rem/1 inherit; }
-.leda-mode-close:hover { background: #161b2212; }
-.leda-mode-kicker { margin: 0 40px 6px 0; text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 800; }
-.leda-mode h2 { margin: 0 36px 18px 0; font-size: 1.75rem; letter-spacing: -.04em; }
-.leda-mode ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.leda-mode li { display: flex; justify-content: space-between; gap: 18px; padding-top: 8px; border-top: 1px solid #161b2240; font-size: .85rem; }
-.leda-mode strong { color: var(--blue-dark); white-space: nowrap; }
-.leda-mode-note { margin: 16px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--ink); color: white; font-size: .82rem; font-weight: 700; text-align: center; }
+.coffee-widget[hidden] { display: none; }
+.coffee-widget.is-visible { transform: translateY(0) scale(1); opacity: 1; }
+.coffee-trigger { position: relative; display: grid; place-items: center; width: 56px; height: 56px; margin-left: auto; border: 2px solid var(--ink); border-radius: 50%; background: var(--coral); color: white; box-shadow: 5px 5px 0 var(--ink); cursor: pointer; font: 400 1.65rem/1 sans-serif; }
+.coffee-trigger:hover { transform: translateY(-2px) rotate(-4deg); }
+.coffee-steam { position: absolute; top: -18px; left: 22px; color: var(--ink); font: 800 1.25rem/1 "Manrope", sans-serif; animation: steam 1.8s ease-in-out infinite; }
+.coffee-message { position: absolute; right: 0; bottom: 72px; width: min(300px, calc(100vw - 32px)); padding: 17px 18px; border: 2px solid var(--ink); border-radius: 16px 16px 4px 16px; background: white; color: var(--ink); box-shadow: 6px 6px 0 var(--ink); animation: coffee-note-in .25s ease-out both; }
+.coffee-message[hidden] { display: none; }
+.coffee-message p { margin: 0; font-size: .92rem; line-height: 1.45; }
+.coffee-message .coffee-kicker { margin-bottom: 5px; color: var(--blue-dark); text-transform: uppercase; letter-spacing: .1em; font-size: .68rem; font-weight: 800; }
+@keyframes steam { 50% { transform: translateY(-5px); opacity: .45; } }
+@keyframes coffee-note-in { from { transform: translateY(8px) scale(.96); opacity: 0; } }
 footer { display: flex; justify-content: space-between; gap: 20px; padding: 24px 32px; background: var(--ink); color: #78828f; border-top: 1px solid #ffffff16; font-size: .8rem; }
 
 @media (max-width: 800px) {
@@ -176,7 +170,9 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding: 24px
   .scenario { min-height: auto; }
   .scenario span { margin-bottom: 8px; }
   .contact { padding: 90px 20px; }
-  .leda-mode { right: 16px; bottom: 16px; }
+  .coffee-widget { right: 12px; bottom: 12px; }
+  .coffee-trigger { width: 50px; height: 50px; font-size: 1.45rem; }
+  .coffee-message { right: 0; bottom: 64px; }
   footer { flex-direction: column; padding: 24px 20px; }
 }
 
@@ -188,5 +184,6 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding: 24px
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .ticker-track { animation: none; }
-  .leda-mode { transform: none; }
+  .coffee-widget { transform: none; }
+  .coffee-steam { animation: none; }
 }

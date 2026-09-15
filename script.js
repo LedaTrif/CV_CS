@@ -13,7 +13,7 @@ const translations = {
     scenarioEscalation: "Urgent customer escalation", scenarioWorkflow: "Repetitive team workflow", scenarioContent: "Multilingual content task", labFootnote: "The important part is not the prompt. It is knowing what to verify before acting.",
     toolboxKicker: "Toolbox", toolboxTitle: "Tools change.<br>Good judgment travels.", languagesKicker: "Languages", native: "Native",
     contactKicker: "Let’s talk", contactTitle: "Need someone who can handle the customer — and improve the system behind the conversation?", emailMe: "Email me", footer: "Made with curiosity, judgment & AI.",
-    ledaModeKicker: "System update", ledaModeTitle: "Leda mode activated", humanJudgment: "Human judgment", alwaysOn: "Always on", aiSpeed: "AI speed", boosted: "Boosted", calmPressure: "Calm under pressure", ready: "Ready", builtFast: "First version built with AI in under 5 minutes.", closeLedaMode: "Close Leda mode",
+    coffeeKicker: "A quick coffee fact", coffeeMessage: "Leda created this page with AI in five minutes — without writing a single line of code.", coffeeLabel: "Open a quick coffee fact",
   },
   es: {
     skipLink: "Saltar al contenido principal", scenarioGroupLabel: "Elige un escenario de trabajo", homeLabel: "Inicio de Leda Trifonova", navLabel: "Navegación principal", highlightsLabel: "Datos profesionales destacados", portraitAlt: "Retrato de Leda Trifonova", toolsLabel: "Herramientas y habilidades",
@@ -29,7 +29,7 @@ const translations = {
     scenarioEscalation: "Escalación urgente de cliente", scenarioWorkflow: "Proceso de equipo repetitivo", scenarioContent: "Tarea de contenido multilingüe", labFootnote: "Lo importante no es el prompt. Es saber qué verificar antes de actuar.",
     toolboxKicker: "Herramientas", toolboxTitle: "Las herramientas cambian.<br>El buen criterio viaja.", languagesKicker: "Idiomas", native: "Nativo",
     contactKicker: "Hablemos", contactTitle: "¿Buscas a alguien que atienda al cliente y mejore el sistema detrás de la conversación?", emailMe: "Escríbeme", footer: "Hecho con curiosidad, criterio e IA.",
-    ledaModeKicker: "Actualización del sistema", ledaModeTitle: "Modo Leda activado", humanJudgment: "Criterio humano", alwaysOn: "Siempre activo", aiSpeed: "Velocidad con IA", boosted: "Potenciada", calmPressure: "Calma bajo presión", ready: "Lista", builtFast: "Primera versión creada con IA en menos de 5 minutos.", closeLedaMode: "Cerrar modo Leda",
+    coffeeKicker: "Un dato para la pausa del café", coffeeMessage: "Esta página la creó Leda con IA en cinco minutos, sin escribir una sola línea de código.", coffeeLabel: "Abrir un dato para la pausa del café",
   }
 };
 
@@ -51,8 +51,9 @@ let activeScenario = "escalation";
 const output = document.getElementById("scenarioOutput");
 const languageToggle = document.getElementById("languageToggle");
 const scenarioButtons = [...document.querySelectorAll(".scenario")];
-const ledaMode = document.getElementById("ledaMode");
-const ledaModeClose = document.getElementById("ledaModeClose");
+const coffeeWidget = document.getElementById("coffeeWidget");
+const coffeeTrigger = document.getElementById("coffeeTrigger");
+const coffeeMessage = document.getElementById("coffeeMessage");
 
 function renderScenario() {
   output.innerHTML = scenarios[language][activeScenario];
@@ -109,22 +110,30 @@ scenarioButtons.forEach((button, index) => {
 
 languageToggle.addEventListener("click", () => setLanguage(language === "en" ? "es" : "en"));
 
-let ledaModeShown = false;
+let coffeeShown = false;
 if ("IntersectionObserver" in window) {
-  const ledaModeObserver = new IntersectionObserver(entries => {
-    if (ledaModeShown || !entries.some(entry => entry.isIntersecting)) return;
-    ledaModeShown = true;
-    ledaMode.hidden = false;
-    requestAnimationFrame(() => ledaMode.classList.add("is-visible"));
-    ledaModeObserver.disconnect();
+  const coffeeObserver = new IntersectionObserver(entries => {
+    if (coffeeShown || !entries.some(entry => entry.isIntersecting)) return;
+    coffeeShown = true;
+    coffeeWidget.hidden = false;
+    requestAnimationFrame(() => coffeeWidget.classList.add("is-visible"));
+    coffeeObserver.disconnect();
   }, { threshold: 0.25 });
 
-  ledaModeObserver.observe(document.getElementById("ai-lab"));
+  coffeeObserver.observe(document.getElementById("ai-lab"));
 }
 
-ledaModeClose.addEventListener("click", () => {
-  ledaMode.classList.remove("is-visible");
-  ledaMode.addEventListener("transitionend", () => { ledaMode.hidden = true; }, { once: true });
+coffeeTrigger.addEventListener("click", () => {
+  const opening = coffeeMessage.hidden;
+  coffeeMessage.hidden = !opening;
+  coffeeTrigger.setAttribute("aria-expanded", String(opening));
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key !== "Escape" || coffeeMessage.hidden) return;
+  coffeeMessage.hidden = true;
+  coffeeTrigger.setAttribute("aria-expanded", "false");
+  coffeeTrigger.focus();
 });
 
 let savedLanguage;

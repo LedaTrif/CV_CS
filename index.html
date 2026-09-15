@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260915-3">
 </head>
 <body>
   <a class="skip-link" href="#main-content" data-i18n="skipLink">Skip to main content</a>
@@ -117,16 +117,15 @@
       <p class="lab-footnote" data-i18n="labFootnote">The important part is not the prompt. It is knowing what to verify before acting.</p>
     </section>
 
-    <aside class="leda-mode" id="ledaMode" aria-labelledby="ledaModeTitle" aria-live="polite" hidden>
-      <button class="leda-mode-close" id="ledaModeClose" type="button" aria-label="Close Leda mode" data-i18n-aria-label="closeLedaMode">×</button>
-      <p class="leda-mode-kicker"><span aria-hidden="true">✦</span> <span data-i18n="ledaModeKicker">System update</span></p>
-      <h2 id="ledaModeTitle" data-i18n="ledaModeTitle">Leda mode activated</h2>
-      <ul>
-        <li><span data-i18n="humanJudgment">Human judgment</span><strong data-i18n="alwaysOn">Always on</strong></li>
-        <li><span data-i18n="aiSpeed">AI speed</span><strong data-i18n="boosted">Boosted</strong></li>
-        <li><span data-i18n="calmPressure">Calm under pressure</span><strong data-i18n="ready">Ready</strong></li>
-      </ul>
-      <p class="leda-mode-note" data-i18n="builtFast">First version built with AI in under 5 minutes.</p>
+    <aside class="coffee-widget" id="coffeeWidget" hidden>
+      <div class="coffee-message" id="coffeeMessage" role="status" hidden>
+        <p class="coffee-kicker" data-i18n="coffeeKicker">A quick coffee fact</p>
+        <p data-i18n="coffeeMessage">Leda created this page with AI in five minutes — without writing a single line of code.</p>
+      </div>
+      <button class="coffee-trigger" id="coffeeTrigger" type="button" aria-expanded="false" aria-controls="coffeeMessage" aria-label="Open a quick coffee fact" data-i18n-aria-label="coffeeLabel">
+        <span class="coffee-steam" aria-hidden="true">⌁</span>
+        <span aria-hidden="true">☕</span>
+      </button>
     </aside>
 
     <section class="section toolbox">
@@ -165,6 +164,6 @@
     <span>© 2026 Leda Trifonova</span>
     <span data-i18n="footer">Made with curiosity, judgment & AI.</span>
   </footer>
-  <script src="script.js" defer></script>
+  <script src="script.js?v=20260915-3" defer></script>
 </body>
 </html>
