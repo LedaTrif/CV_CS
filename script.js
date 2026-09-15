@@ -13,7 +13,7 @@ const translations = {
     scenarioEscalation: "Urgent customer escalation", scenarioWorkflow: "Repetitive team workflow", scenarioContent: "Multilingual content task", labFootnote: "The important part is not the prompt. It is knowing what to verify before acting.",
     toolboxKicker: "Toolbox", toolboxTitle: "Tools change.<br>Good judgment travels.", languagesKicker: "Languages", native: "Native",
     contactKicker: "Let’s talk", contactTitle: "Need someone who can handle the customer — and improve the system behind the conversation?", emailMe: "Email me", footer: "Made with curiosity, judgment & AI.",
-    coffeeKicker: "A quick coffee fact", coffeeMessage: "Leda created this page with AI in five minutes — without writing a single line of code.", coffeeLabel: "Open a quick coffee fact",
+    coffeeKicker: "Behind this page", coffeeMessage: "Leda created this page with AI in five minutes — without writing a single line of code.", coffeeLabel: "Show or hide the story behind this page",
   },
   es: {
     skipLink: "Saltar al contenido principal", scenarioGroupLabel: "Elige un escenario de trabajo", homeLabel: "Inicio de Leda Trifonova", navLabel: "Navegación principal", highlightsLabel: "Datos profesionales destacados", portraitAlt: "Retrato de Leda Trifonova", toolsLabel: "Herramientas y habilidades",
@@ -29,7 +29,7 @@ const translations = {
     scenarioEscalation: "Escalación urgente de cliente", scenarioWorkflow: "Proceso de equipo repetitivo", scenarioContent: "Tarea de contenido multilingüe", labFootnote: "Lo importante no es el prompt. Es saber qué verificar antes de actuar.",
     toolboxKicker: "Herramientas", toolboxTitle: "Las herramientas cambian.<br>El buen criterio viaja.", languagesKicker: "Idiomas", native: "Nativo",
     contactKicker: "Hablemos", contactTitle: "¿Buscas a alguien que atienda al cliente y mejore el sistema detrás de la conversación?", emailMe: "Escríbeme", footer: "Hecho con curiosidad, criterio e IA.",
-    coffeeKicker: "Un dato para la pausa del café", coffeeMessage: "Esta página la creó Leda con IA en cinco minutos, sin escribir una sola línea de código.", coffeeLabel: "Abrir un dato para la pausa del café",
+    coffeeKicker: "Detrás de esta página", coffeeMessage: "Esta página la creó Leda con IA en cinco minutos, sin escribir una sola línea de código.", coffeeLabel: "Mostrar u ocultar la historia detrás de esta página",
   }
 };
 
@@ -124,9 +124,9 @@ if ("IntersectionObserver" in window) {
 }
 
 coffeeTrigger.addEventListener("click", () => {
-  const opening = coffeeMessage.hidden;
-  coffeeMessage.hidden = !opening;
-  coffeeTrigger.setAttribute("aria-expanded", String(opening));
+  const isOpen = coffeeTrigger.getAttribute("aria-expanded") === "true";
+  coffeeMessage.toggleAttribute("hidden", isOpen);
+  coffeeTrigger.setAttribute("aria-expanded", String(!isOpen));
 });
 
 document.addEventListener("keydown", event => {
