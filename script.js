@@ -12,8 +12,8 @@ const translations = {
     labKicker: "Interactive AI lab", labTitle: "Give me a situation.", labIntro: "AI does not replace judgment. It helps me structure information, spot gaps and move faster. Choose a real work scenario:",
     scenarioEscalation: "Urgent customer escalation", scenarioWorkflow: "Repetitive team workflow", scenarioContent: "Multilingual content task", labFootnote: "The important part is not the prompt. It is knowing what to verify before acting.",
     toolboxKicker: "Toolbox", toolboxTitle: "Tools change.<br>Good judgment travels.", languagesKicker: "Languages", native: "Native",
-    contactKicker: "Let’s talk", contactTitle: "Need someone who can handle the customer — and improve the system behind the conversation?", emailMe: "Email me", surprise: "One last click ✦", footer: "Made with curiosity, judgment & AI.",
-    surpriseMessage: "Plot twist: the AI built the sparkle. Leda decided where it belongs.",
+    contactKicker: "Let’s talk", contactTitle: "Need someone who can handle the customer — and improve the system behind the conversation?", emailMe: "Email me", footer: "Made with curiosity, judgment & AI.",
+    ledaModeKicker: "System update", ledaModeTitle: "Leda mode activated", humanJudgment: "Human judgment", alwaysOn: "Always on", aiSpeed: "AI speed", boosted: "Boosted", calmPressure: "Calm under pressure", ready: "Ready", builtFast: "First version built with AI in under 5 minutes.", closeLedaMode: "Close Leda mode",
   },
   es: {
     skipLink: "Saltar al contenido principal", scenarioGroupLabel: "Elige un escenario de trabajo", homeLabel: "Inicio de Leda Trifonova", navLabel: "Navegación principal", highlightsLabel: "Datos profesionales destacados", portraitAlt: "Retrato de Leda Trifonova", toolsLabel: "Herramientas y habilidades",
@@ -28,8 +28,8 @@ const translations = {
     labKicker: "Laboratorio interactivo de IA", labTitle: "Dame una situación.", labIntro: "La IA no sustituye el criterio. Me ayuda a estructurar información, detectar vacíos y avanzar más rápido. Elige un escenario real:",
     scenarioEscalation: "Escalación urgente de cliente", scenarioWorkflow: "Proceso de equipo repetitivo", scenarioContent: "Tarea de contenido multilingüe", labFootnote: "Lo importante no es el prompt. Es saber qué verificar antes de actuar.",
     toolboxKicker: "Herramientas", toolboxTitle: "Las herramientas cambian.<br>El buen criterio viaja.", languagesKicker: "Idiomas", native: "Nativo",
-    contactKicker: "Hablemos", contactTitle: "¿Buscas a alguien que atienda al cliente y mejore el sistema detrás de la conversación?", emailMe: "Escríbeme", surprise: "Un último clic ✦", footer: "Hecho con curiosidad, criterio e IA.",
-    surpriseMessage: "Giro de guion: la IA creó el brillo. Leda decidió dónde colocarlo.",
+    contactKicker: "Hablemos", contactTitle: "¿Buscas a alguien que atienda al cliente y mejore el sistema detrás de la conversación?", emailMe: "Escríbeme", footer: "Hecho con curiosidad, criterio e IA.",
+    ledaModeKicker: "Actualización del sistema", ledaModeTitle: "Modo Leda activado", humanJudgment: "Criterio humano", alwaysOn: "Siempre activo", aiSpeed: "Velocidad con IA", boosted: "Potenciada", calmPressure: "Calma bajo presión", ready: "Lista", builtFast: "Primera versión creada con IA en menos de 5 minutos.", closeLedaMode: "Cerrar modo Leda",
   }
 };
 
@@ -51,7 +51,8 @@ let activeScenario = "escalation";
 const output = document.getElementById("scenarioOutput");
 const languageToggle = document.getElementById("languageToggle");
 const scenarioButtons = [...document.querySelectorAll(".scenario")];
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const ledaMode = document.getElementById("ledaMode");
+const ledaModeClose = document.getElementById("ledaModeClose");
 
 function renderScenario() {
   output.innerHTML = scenarios[language][activeScenario];
@@ -108,22 +109,22 @@ scenarioButtons.forEach((button, index) => {
 
 languageToggle.addEventListener("click", () => setLanguage(language === "en" ? "es" : "en"));
 
-document.getElementById("surpriseButton").addEventListener("click", event => {
-  document.getElementById("surpriseMessage").textContent = translations[language].surpriseMessage;
-  if (reduceMotion.matches) return;
-  const symbols = ["✦", "AI", "Hola", "Hi", "✓", "♥"];
-  for (let i = 0; i < 24; i++) {
-    const spark = document.createElement("span");
-    spark.className = "spark";
-    spark.textContent = symbols[i % symbols.length];
-    spark.style.left = `${event.clientX}px`;
-    spark.style.top = `${event.clientY}px`;
-    spark.style.color = i % 2 ? "#d7ff58" : "#ff6b5f";
-    spark.style.setProperty("--x", `${(Math.random() - .5) * 430}px`);
-    spark.style.setProperty("--y", `${(Math.random() - .5) * 300}px`);
-    document.body.appendChild(spark);
-    setTimeout(() => spark.remove(), 950);
-  }
+let ledaModeShown = false;
+if ("IntersectionObserver" in window) {
+  const ledaModeObserver = new IntersectionObserver(entries => {
+    if (ledaModeShown || !entries.some(entry => entry.isIntersecting)) return;
+    ledaModeShown = true;
+    ledaMode.hidden = false;
+    requestAnimationFrame(() => ledaMode.classList.add("is-visible"));
+    ledaModeObserver.disconnect();
+  }, { threshold: 0.25 });
+
+  ledaModeObserver.observe(document.getElementById("ai-lab"));
+}
+
+ledaModeClose.addEventListener("click", () => {
+  ledaMode.classList.remove("is-visible");
+  ledaMode.addEventListener("transitionend", () => { ledaMode.hidden = true; }, { once: true });
 });
 
 let savedLanguage;

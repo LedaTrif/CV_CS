@@ -129,10 +129,32 @@ h2 { font-size: clamp(2.5rem, 5.5vw, 5rem); letter-spacing: -.055em; margin: 0; 
 .contact h2 { max-width: 970px; margin: 20px 0 46px; }
 .white { background: white; color: var(--ink); }
 .ghost { border: 1px solid #ffffff66; color: white; }
-.surprise { display: block; min-height: 44px; margin: 60px auto 0; border: 0; background: none; color: #a7b0bc; text-decoration: underline; text-underline-offset: 5px; cursor: pointer; font: 500 .9rem inherit; }
-.surprise-message { min-height: 32px; text-align: center; color: var(--lime); font: 700 1.1rem "Manrope", sans-serif; }
-.spark { position: fixed; pointer-events: none; z-index: 50; animation: pop 900ms ease-out forwards; }
-@keyframes pop { to { transform: translate(var(--x), var(--y)) rotate(180deg); opacity: 0; } }
+.leda-mode {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 40;
+  width: min(360px, calc(100vw - 32px));
+  padding: 22px;
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  background: var(--lime);
+  color: var(--ink);
+  box-shadow: 9px 9px 0 var(--ink);
+  transform: translateY(28px) rotate(1deg);
+  opacity: 0;
+  transition: transform .45s cubic-bezier(.2,.8,.2,1), opacity .3s ease;
+}
+.leda-mode[hidden] { display: none; }
+.leda-mode.is-visible { transform: translateY(0) rotate(-1deg); opacity: 1; }
+.leda-mode-close { position: absolute; top: 10px; right: 10px; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; font: 500 1.6rem/1 inherit; }
+.leda-mode-close:hover { background: #161b2212; }
+.leda-mode-kicker { margin: 0 40px 6px 0; text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 800; }
+.leda-mode h2 { margin: 0 36px 18px 0; font-size: 1.75rem; letter-spacing: -.04em; }
+.leda-mode ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.leda-mode li { display: flex; justify-content: space-between; gap: 18px; padding-top: 8px; border-top: 1px solid #161b2240; font-size: .85rem; }
+.leda-mode strong { color: var(--blue-dark); white-space: nowrap; }
+.leda-mode-note { margin: 16px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--ink); color: white; font-size: .82rem; font-weight: 700; text-align: center; }
 footer { display: flex; justify-content: space-between; gap: 20px; padding: 24px 32px; background: var(--ink); color: #78828f; border-top: 1px solid #ffffff16; font-size: .8rem; }
 
 @media (max-width: 800px) {
@@ -154,6 +176,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding: 24px
   .scenario { min-height: auto; }
   .scenario span { margin-bottom: 8px; }
   .contact { padding: 90px 20px; }
+  .leda-mode { right: 16px; bottom: 16px; }
   footer { flex-direction: column; padding: 24px 20px; }
 }
 
@@ -165,4 +188,5 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding: 24px
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .ticker-track { animation: none; }
+  .leda-mode { transform: none; }
 }
