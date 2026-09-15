@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Leda Trifonova — Customer Support, Travel Operations and practical AI automation specialist in Barcelona.">
+  <meta name="theme-color" content="#f4f6f8">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Leda Trifonova — Customer Support & AI">
+  <meta property="og:description" content="Customer Support and Travel Operations specialist using practical AI to improve service workflows.">
+  <meta name="twitter:card" content="summary">
   <title>Leda Trifonova — Customer Support & AI</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,10 +17,11 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content" data-i18n="skipLink">Skip to main content</a>
   <div class="noise" aria-hidden="true"></div>
   <header class="topbar">
-    <a class="wordmark" href="#top" aria-label="Leda Trifonova home">LT<span>.</span></a>
-    <nav aria-label="Primary navigation">
+    <a class="wordmark" href="#main-content" aria-label="Leda Trifonova home" data-i18n-aria-label="homeLabel">LT<span>.</span></a>
+    <nav aria-label="Primary navigation" data-i18n-aria-label="navLabel">
       <a href="#experience" data-i18n="navExperience">Experience</a>
       <a href="#ai-lab" data-i18n="navAI">AI in action</a>
       <a href="#contact" data-i18n="navContact">Contact</a>
@@ -23,7 +29,7 @@
     <button class="language" id="languageToggle" type="button" aria-label="Cambiar a español">ES</button>
   </header>
 
-  <main id="top">
+  <main id="main-content" tabindex="-1">
     <section class="hero">
       <div class="hero-copy">
         <p class="eyebrow"><span class="status-dot"></span><span data-i18n="available">Barcelona · Open to fully remote</span></p>
@@ -33,7 +39,7 @@
           <a class="button primary" href="#ai-lab" data-i18n="seeAI">See how I use AI</a>
           <a class="button secondary" href="Leda_Trifonova_CV_2026_EN_CS.pdf" download data-i18n="downloadCV">Download CV</a>
         </div>
-        <div class="proof-row" aria-label="Professional highlights">
+        <div class="proof-row" aria-label="Professional highlights" data-i18n-aria-label="highlightsLabel">
           <div><strong>12+</strong><span data-i18n="years">years in support & travel</span></div>
           <div><strong>70+</strong><span data-i18n="cases">cases handled daily</span></div>
           <div><strong>5</strong><span data-i18n="languages">working languages</span></div>
@@ -41,7 +47,7 @@
       </div>
       <div class="portrait-wrap">
         <div class="portrait-card">
-          <img src="leda-trifonova.jpeg" alt="Portrait of Leda Trifonova" width="800" height="800">
+          <img src="leda-trifonova.jpeg" alt="Portrait of Leda Trifonova" data-i18n-alt="portraitAlt" width="800" height="800" fetchpriority="high" decoding="async">
           <div class="portrait-note note-one" data-i18n="noteOne">Human first</div>
           <div class="portrait-note note-two" data-i18n="noteTwo">AI assisted</div>
         </div>
@@ -89,14 +95,24 @@
         <h2 data-i18n="labTitle">Give me a situation.</h2>
         <p data-i18n="labIntro">AI does not replace judgment. It helps me structure information, spot gaps and move faster. Choose a real work scenario:</p>
       </div>
-      <div class="scenario-grid" role="group" aria-label="Choose a work scenario">
-        <button class="scenario active" type="button" data-scenario="escalation"><span>01</span><b data-i18n="scenarioEscalation">Urgent customer escalation</b></button>
-        <button class="scenario" type="button" data-scenario="workflow"><span>02</span><b data-i18n="scenarioWorkflow">Repetitive team workflow</b></button>
-        <button class="scenario" type="button" data-scenario="content"><span>03</span><b data-i18n="scenarioContent">Multilingual content task</b></button>
+      <div class="scenario-grid" role="tablist" aria-label="Choose a work scenario" data-i18n-aria-label="scenarioGroupLabel">
+        <button class="scenario active" id="tab-escalation" type="button" role="tab" aria-selected="true" aria-controls="scenarioOutput" tabindex="0" data-scenario="escalation"><span>01</span><b data-i18n="scenarioEscalation">Urgent customer escalation</b></button>
+        <button class="scenario" id="tab-workflow" type="button" role="tab" aria-selected="false" aria-controls="scenarioOutput" tabindex="-1" data-scenario="workflow"><span>02</span><b data-i18n="scenarioWorkflow">Repetitive team workflow</b></button>
+        <button class="scenario" id="tab-content" type="button" role="tab" aria-selected="false" aria-controls="scenarioOutput" tabindex="-1" data-scenario="content"><span>03</span><b data-i18n="scenarioContent">Multilingual content task</b></button>
       </div>
-      <div class="lab-console" aria-live="polite">
+      <div class="lab-console">
         <div class="console-bar"><span></span><span></span><span></span><small>leda-ai-copilot</small></div>
-        <div class="console-content" id="scenarioOutput"></div>
+        <div class="console-content" id="scenarioOutput" role="tabpanel" tabindex="0" aria-labelledby="tab-escalation" aria-live="polite">
+          <div class="prompt">&gt; A guest cannot check in. Information is incomplete. What now?</div>
+          <strong>My AI-assisted workflow:</strong>
+          <ul>
+            <li>Extract verified booking facts and identify what is missing.</li>
+            <li>Prioritise by urgency, guest impact and SLA.</li>
+            <li>Draft a clear message for the hotel and a calm update for the partner.</li>
+            <li>Record actions and the next commitment time.</li>
+          </ul>
+          <span class="human-check">Human check → Never send an unverified confirmation.</span>
+        </div>
       </div>
       <p class="lab-footnote" data-i18n="labFootnote">The important part is not the prompt. It is knowing what to verify before acting.</p>
     </section>
@@ -106,7 +122,7 @@
         <p class="section-kicker" data-i18n="toolboxKicker">Toolbox</p>
         <h2 data-i18n="toolboxTitle">Tools change.<br>Good judgment travels.</h2>
       </div>
-      <div class="tool-cloud" aria-label="Tools and skills">
+      <div class="tool-cloud" aria-label="Tools and skills" data-i18n-aria-label="toolsLabel">
         <span>Zendesk</span><span>Slack</span><span>Aircall</span><span>LiteAPI</span><span>Excel</span><span>WordPress</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>AI tools</span><span>Travel systems</span><span>Process design</span>
       </div>
     </section>
@@ -139,6 +155,6 @@
     <span>© 2026 Leda Trifonova</span>
     <span data-i18n="footer">Made with curiosity, judgment & AI.</span>
   </footer>
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

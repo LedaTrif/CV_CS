@@ -1,5 +1,6 @@
 const translations = {
   en: {
+    skipLink: "Skip to main content", scenarioGroupLabel: "Choose a work scenario", homeLabel: "Leda Trifonova home", navLabel: "Primary navigation", highlightsLabel: "Professional highlights", portraitAlt: "Portrait of Leda Trifonova", toolsLabel: "Tools and skills",
     navExperience: "Experience", navAI: "AI in action", navContact: "Contact",
     available: "Barcelona · Open to fully remote", hello: "Hi, I’m", heroLead: "I solve customer problems, coordinate travel operations and use AI to turn repetitive work into clear, faster workflows.",
     seeAI: "See how I use AI", downloadCV: "Download CV", years: "years in support & travel", cases: "cases handled daily", languages: "working languages",
@@ -15,6 +16,7 @@ const translations = {
     surpriseMessage: "Plot twist: the AI built the sparkle. Leda decided where it belongs.",
   },
   es: {
+    skipLink: "Saltar al contenido principal", scenarioGroupLabel: "Elige un escenario de trabajo", homeLabel: "Inicio de Leda Trifonova", navLabel: "Navegación principal", highlightsLabel: "Datos profesionales destacados", portraitAlt: "Retrato de Leda Trifonova", toolsLabel: "Herramientas y habilidades",
     navExperience: "Experiencia", navAI: "IA en acción", navContact: "Contacto",
     available: "Barcelona · Disponible para trabajo 100% remoto", hello: "Hola, soy", heroLead: "Resuelvo problemas de clientes, coordino operaciones de viaje y uso la IA para convertir tareas repetitivas en procesos claros y ágiles.",
     seeAI: "Cómo uso la IA", downloadCV: "Descargar CV", years: "años en soporte y turismo", cases: "casos gestionados al día", languages: "idiomas de trabajo",
@@ -48,8 +50,13 @@ let language = "en";
 let activeScenario = "escalation";
 const output = document.getElementById("scenarioOutput");
 const languageToggle = document.getElementById("languageToggle");
+const scenarioButtons = [...document.querySelectorAll(".scenario")];
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-function renderScenario() { output.innerHTML = scenarios[language][activeScenario]; }
+function renderScenario() {
+  output.innerHTML = scenarios[language][activeScenario];
+  output.setAttribute("aria-labelledby", `tab-${activeScenario}`);
+}
 function setLanguage(next) {
   language = next;
   document.documentElement.lang = next;
@@ -57,17 +64,45 @@ function setLanguage(next) {
     const value = translations[next][el.dataset.i18n];
     if (value) el.innerHTML = value;
   });
+  document.querySelectorAll("[data-i18n-aria-label]").forEach(el => {
+    const value = translations[next][el.dataset.i18nAriaLabel];
+    if (value) el.setAttribute("aria-label", value);
+  });
+  document.querySelectorAll("[data-i18n-alt]").forEach(el => {
+    const value = translations[next][el.dataset.i18nAlt];
+    if (value) el.alt = value;
+  });
   languageToggle.textContent = next === "en" ? "ES" : "EN";
   languageToggle.setAttribute("aria-label", next === "en" ? "Cambiar a español" : "Switch to English");
   renderScenario();
+  try { localStorage.setItem("preferredLanguage", next); } catch (_) {}
 }
 
-document.querySelectorAll(".scenario").forEach(button => {
+function selectScenario(button, moveFocus = false) {
+  scenarioButtons.forEach(item => {
+    const selected = item === button;
+    item.classList.toggle("active", selected);
+    item.setAttribute("aria-selected", String(selected));
+    item.tabIndex = selected ? 0 : -1;
+  });
+  activeScenario = button.dataset.scenario;
+  renderScenario();
+  if (moveFocus) button.focus();
+}
+
+scenarioButtons.forEach((button, index) => {
   button.addEventListener("click", () => {
-    document.querySelectorAll(".scenario").forEach(item => item.classList.remove("active"));
-    button.classList.add("active");
-    activeScenario = button.dataset.scenario;
-    renderScenario();
+    selectScenario(button);
+  });
+  button.addEventListener("keydown", event => {
+    let nextIndex;
+    if (["ArrowRight", "ArrowDown"].includes(event.key)) nextIndex = (index + 1) % scenarioButtons.length;
+    if (["ArrowLeft", "ArrowUp"].includes(event.key)) nextIndex = (index - 1 + scenarioButtons.length) % scenarioButtons.length;
+    if (event.key === "Home") nextIndex = 0;
+    if (event.key === "End") nextIndex = scenarioButtons.length - 1;
+    if (nextIndex === undefined) return;
+    event.preventDefault();
+    selectScenario(scenarioButtons[nextIndex], true);
   });
 });
 
@@ -75,6 +110,7 @@ languageToggle.addEventListener("click", () => setLanguage(language === "en" ? "
 
 document.getElementById("surpriseButton").addEventListener("click", event => {
   document.getElementById("surpriseMessage").textContent = translations[language].surpriseMessage;
+  if (reduceMotion.matches) return;
   const symbols = ["✦", "AI", "Hola", "Hi", "✓", "♥"];
   for (let i = 0; i < 24; i++) {
     const spark = document.createElement("span");
@@ -90,4 +126,6 @@ document.getElementById("surpriseButton").addEventListener("click", event => {
   }
 });
 
-renderScenario();
+let savedLanguage;
+try { savedLanguage = localStorage.getItem("preferredLanguage"); } catch (_) {}
+setLanguage(savedLanguage === "es" ? "es" : "en");
